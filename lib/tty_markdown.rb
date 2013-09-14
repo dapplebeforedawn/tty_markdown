@@ -67,17 +67,3 @@ module Redcarpet
     end
   end
 end
-
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::ColorDown, fenced_code_blocks: true)
-puts markdown.render <<HEREDOC
-# A Title
-
-[alink](http://www.google.com)
-and a paragraph *with some emphasis*
-
-```ruby
-puts "this is ruby code"
-```
-
-HEREDOC
-
