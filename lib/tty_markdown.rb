@@ -2,7 +2,7 @@
 
 require          'redcarpet'
 require_relative './ruby_color'
-require_relative './unkown_color'
+require_relative './unknown_color'
 
 module Redcarpet
   module Render
