@@ -1,7 +1,5 @@
-#! /usr/bin/env ruby
-
-require 'redcarpet'
-require './ruby_color'
+require          'redcarpet'
+require_relative './ruby_color'
 
 module Redcarpet
   module Render
