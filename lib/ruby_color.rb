@@ -26,7 +26,7 @@ module ColorCode
           when "expr"     then code_line += token.colorize(:white)
           when "comment"  then code_line += token.colorize(:magenta)
           when "constant" then code_line += token.colorize(:yellow) 
-          else code_line = code_line + "  group: #{token.group}"
+          else code_line += token.group.to_s
           end
         end
         (line_no.to_s.rjust(4) + ": ").colorize(:light_black) + code_line
