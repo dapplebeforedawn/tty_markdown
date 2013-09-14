@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.email       = 'markjlorenz@gmail.com'
   s.homepage    =
     'http://github.com/dapplebeforedawn'
-  s.license       = 'MIT'
+  s.license     = 'MIT'
 
   s.files = %w[ lib/tty_markdown.rb lib/ruby_color.rb ]
+  s.require_paths = ["lib"]
 
   s.add_dependency 'colorize',  '0.5.8'
   s.add_dependency 'redcarpet', '3.0.0'
