@@ -10,7 +10,8 @@ Gem::Specification.new do |s|
     'http://github.com/dapplebeforedawn'
   s.license     = 'MIT'
 
-  s.files = %w[ lib/tty_markdown.rb lib/ruby_color.rb ]
+  s.files         = %w[ lib/tty_markdown.rb lib/ruby_color.rb bin/tty_md ]
+  s.executables   = %w[ tty_md ]
   s.require_paths = ["lib"]
 
   s.add_dependency 'colorize',  '0.5.8'

@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+require_relative '../lib/tty_markdown'
+
+colorizer = Redcarpet::Render::ColorDown
+markdown  = Redcarpet::Markdown.new(colorizer, fenced_code_blocks: true)
+puts markdown.render ARGV.read

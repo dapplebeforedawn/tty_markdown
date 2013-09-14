@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 require          'redcarpet'
 require_relative './ruby_color'
 
@@ -8,6 +10,7 @@ module Redcarpet
       RED        = "\033[0;31m"
       GREEN      = "\033[0;32m"
       YELLOW     = "\033[0;33m"
+      L_GRAY     = "\033[0;37m"
       BLUE_BG    = "\033[0;44m"
       BOLD       = "\033[0;01m"
       UNDERSCORE = "\033[0;04m"
@@ -15,8 +18,7 @@ module Redcarpet
       # Methods where the first argument is the text content
       [
         # block-level calls
-        :block_quote,
-        :block_html, :list, :list_item, :paragraph,
+        :block_html,
 
         # span-level calls
         :autolink, :codespan, :double_emphasis,
@@ -62,6 +64,29 @@ module Redcarpet
         [ BLUE_BG,   heads, text, 
           COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
       end
+
+      def list(text, type)
+        text + "\n"
+      end
+    
+      def list_item(text, type)
+        #if type == "unordered"
+          "- " + text
+        #end
+      end
+
+      def paragraph(text)
+        text + "\n"
+      end
+
+      def block_quote(text)
+        [ GREEN,    "> ", text, 
+          COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
+      end
+
     end
   end
 end
+
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::ColorDown, fenced_code_blocks: true)
+puts markdown.render text
