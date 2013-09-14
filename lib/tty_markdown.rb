@@ -76,7 +76,7 @@ module Redcarpet
       end
 
       def paragraph(text)
-        text + "\n"
+        "\n" + text + "\n"
       end
 
       def block_quote(text)
@@ -87,6 +87,3 @@ module Redcarpet
     end
   end
 end
-
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::ColorDown, fenced_code_blocks: true)
-puts markdown.render text
