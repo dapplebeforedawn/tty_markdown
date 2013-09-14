@@ -30,7 +30,7 @@ module ColorCode
           end
         end
         (line_no.to_s.rjust(4) + ": ").colorize(:light_black) + code_line
-      end.join("\n")
+      end.join()
     end
   end
 end

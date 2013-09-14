@@ -6,14 +6,24 @@ require_relative './ruby_color'
 module Redcarpet
   module Render
     class ColorDown < Base
+      UNORDERED  = /unordered/
+      RUBY_LANG  = /ruby/
+
       COLOR_OFF  = "\033[0m"
+      WHITE      = "\033[0;107m"
       RED        = "\033[0;31m"
       GREEN      = "\033[0;32m"
       YELLOW     = "\033[0;33m"
       L_GRAY     = "\033[0;37m"
+      CYAN       = "\033[0;36m"
       BLUE_BG    = "\033[0;44m"
+      GRAY_BG    = "\033[0;100m"
+      ORANGE     = "\033[38;5;136m"
+      ROSE       = "\033[38;5;167m"
       BOLD       = "\033[0;01m"
+      DIM        = "\033[0;02m"
       UNDERSCORE = "\033[0;04m"
+      BINK       = "\033[0;05m"
 
       # Methods where the first argument is the text content
       [
@@ -21,8 +31,8 @@ module Redcarpet
         :block_html,
 
         # span-level calls
-        :autolink, :codespan, :double_emphasis,
-        :emphasis, :underline, :raw_html,
+        :autolink, :double_emphasis,
+        :underline, :raw_html,
         :triple_emphasis, :strikethrough,
         :superscript,
 
@@ -44,35 +54,43 @@ module Redcarpet
       
       def block_code(text, lang)
         result = "```#{lang}\n"
-        if lang == "ruby"
+        if lang.match RUBY_LANG
           result << ColorCode::Ruby.new(text).colorize
         else
-          result << text
+          result << ColorCode::Unknown.new(text).colorize
         end
         result << "```\n"
         result
       end
 
+      def codespan(text)
+        GRAY_BG + "`#{text}`" + COLOR_OFF
+      end
+
       def emphasis(text)
-        [ BOLD,   text, 
-          COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
+        [ BOLD, '*', text, 
+          '*',  COLOR_OFF ].inject("") { |memo, v| memo << v.to_s }
       end
 
       def header(text, header_level)
         heads = "".tap {|h| header_level.times {h << "#"} }
         heads << " "
-        [ BLUE_BG,   heads, text, 
+        op = [ BLUE_BG,   "\n", heads, text, 
           COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
       end
 
       def list(text, type)
-        text + "\n"
+        text.lines.inject("") do |memo, line|
+          memo << "  " + line
+        end + "\n"
       end
     
       def list_item(text, type)
-        #if type == "unordered"
-          "- " + text
-        #end
+        if type.match UNORDERED
+          "#{ORANGE}- #{COLOR_OFF}" + text
+        else
+          text
+        end
       end
 
       def paragraph(text)
@@ -80,8 +98,12 @@ module Redcarpet
       end
 
       def block_quote(text)
-        [ GREEN,    "> ", text, 
+        [ ROSE,      "> ", text.strip, 
           COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
+      end
+
+      def hrule
+        "\n----"
       end
 
     end
