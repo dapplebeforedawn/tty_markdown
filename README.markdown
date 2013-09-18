@@ -1,4 +1,4 @@
-# What's it do:
+# What's it Do:
 Pretty prints markdown in the terminal
 ![tty_md example](http://i.imgur.com/EdaTm3k.png)
 
@@ -24,7 +24,7 @@ gem install tty_markdown-0.0.1.gem
 ## Using the Binary:
 You now have access to the `tty_md` command in your prompt.  Give it a filename as the first argument (`tty_md your_doc.markdown`), or pipe markdown to it (`echo "# I'm a header" | tty_md`), and you'll see pretty colors.  For my recursive joke loving peeps: `tty_md tty_markdown/README.markdown` to read this file pretty printed.
 
-## Using it Ruby code:
+## Using it Ruby Code:
 ```ruby
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::ColorDown, fenced_code_blocks: true)
 text     = markdown.render File.read("a_file.markdown")
