@@ -1,6 +1,6 @@
 # What's it do:
 Pretty prints markdown in the terminal
-![tty_md example][http://i.imgur.com/EdaTm3k.png]
+![tty_md example](http://i.imgur.com/EdaTm3k.png)
 
 ## Installing it:
 In a Gemfile
