@@ -52,8 +52,9 @@ module Redcarpet
       #def link(link, title, content)
         #content
       #end
-      
-      def block_code(text, lang)
+
+      def block_code(text, lang="")
+        lang ||= lang.to_s
         result = "```#{lang}\n"
         if lang.match RUBY_LANG
           result << ColorCode::Ruby.new(text).colorize
@@ -69,14 +70,14 @@ module Redcarpet
       end
 
       def emphasis(text)
-        [ BOLD, '*', text, 
+        [ BOLD, '*', text,
           '*',  COLOR_OFF ].inject("") { |memo, v| memo << v.to_s }
       end
 
       def header(text, header_level)
         heads = "".tap {|h| header_level.times {h << "#"} }
         heads << " "
-        op = [ BLUE_BG,   "\n", heads, text, 
+        op = [ BLUE_BG,   "\n", heads, text,
           COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
       end
 
@@ -85,7 +86,7 @@ module Redcarpet
           memo << "  " + line
         end + "\n"
       end
-    
+
       def list_item(text, type)
         if type.match UNORDERED
           "#{ORANGE}- #{COLOR_OFF}" + text
@@ -99,7 +100,7 @@ module Redcarpet
       end
 
       def block_quote(text)
-        [ ROSE,      "> ", text.strip, 
+        [ ROSE,      "> ", text.strip,
           COLOR_OFF, "\n" ].inject("") { |memo, v| memo << v.to_s }
       end
 

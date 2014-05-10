@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'tty_markdown'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.date        = '2013-09-14'
   s.summary     = "colorized markdown up in your tty"
   s.description = "reads a file or STDIN and outputs colorized markdown to STDOUT"
